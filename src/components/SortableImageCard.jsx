@@ -29,6 +29,14 @@ const ZoomIcon = () => (
   </svg>
 );
 
+const CropIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6.13 1 6 16a2 2 0 0 0 2 2h15"/>
+    <path d="M1 6.13 16 6a2 2 0 0 1 2 2v15"/>
+  </svg>
+);
+
 const GripIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
     stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -43,7 +51,7 @@ const GripIcon = () => (
 
 /* ─────────────────────────────────────────────────────────────────── */
 
-export default function SortableImageCard({ image, index, onRemove }) {
+export default function SortableImageCard({ image, index, onRemove, onCrop }) {
   const [previewOpen, setPreviewOpen] = useState(false);
 
   const {
@@ -125,6 +133,19 @@ export default function SortableImageCard({ image, index, onRemove }) {
                 <ZoomIcon />
                 <span className="hidden sm:inline">Preview</span>
               </motion.button>
+
+              {/* Crop button */}
+              {onCrop && (
+                <motion.button
+                  whileTap={{ scale: 0.92 }}
+                  onClick={() => onCrop(image.id)}
+                  title="Crop"
+                  className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg bg-brand-500/70 hover:bg-brand-500 text-white text-xs font-medium backdrop-blur-sm transition-colors"
+                >
+                  <CropIcon />
+                  <span className="hidden sm:inline">Crop</span>
+                </motion.button>
+              )}
 
               {/* Remove button */}
               <motion.button
