@@ -18,19 +18,7 @@
 
 ---
 
-## 📸 Screenshots
 
-<!-- Replace these placeholders with actual screenshots of your app -->
-
-| Upload & Preview | Controls Panel | PDF Ready |
-|:---:|:---:|:---:|
-| ![Upload Area](https://via.placeholder.com/400x250?text=Upload+%26+Preview) | ![Controls](https://via.placeholder.com/400x250?text=Controls+Panel) | ![Download](https://via.placeholder.com/400x250?text=PDF+Ready) |
-
-| Dark Mode | Mobile View |
-|:---:|:---:|
-| ![Dark Mode](https://via.placeholder.com/400x250?text=Dark+Mode) | ![Mobile](https://via.placeholder.com/250x400?text=Mobile+View) |
-
----
 
 ## ✨ Features
 
