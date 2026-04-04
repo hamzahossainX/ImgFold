@@ -1,3 +1,4 @@
+// Root component — manages all application state
 /**
  * App.jsx
  * Root component. Manages all application state and composes the layout.
