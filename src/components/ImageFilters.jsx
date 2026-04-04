@@ -22,14 +22,14 @@ export default function ImageFilters({ imageDataUrl, selectedFilter, onFilterSel
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 12 }}
-      className="rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-4 space-y-4"
+      className="rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 sm:p-4 space-y-3 sm:space-y-4"
     >
       <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
         ✦ Image Filters
       </p>
 
       {/* ── Preview grid ──────────────────────────────────────── */}
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
         {FILTER_OPTIONS.map((f) => (
           <button
             key={f.value}

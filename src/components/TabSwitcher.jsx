@@ -35,13 +35,13 @@ const TABS = [
 
 export default function TabSwitcher({ activeTab, onTabChange }) {
   return (
-    <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 mb-5">
+    <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/50 mb-5 max-w-full min-w-0">
       {TABS.map((tab) => (
         <button
           key={tab.value}
           onClick={() => onTabChange(tab.value)}
           className={[
-            'relative flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150',
+            'relative flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-4 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 min-w-0',
             activeTab === tab.value
               ? 'text-white'
               : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200',

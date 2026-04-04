@@ -29,12 +29,12 @@ export default function ScannerControls({
   return (
     <div className="space-y-3">
       {/* ── Main control row ─────────────────────────────────── */}
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-3 sm:gap-4">
         {/* Flip camera (mobile only) */}
         <motion.button
           whileTap={{ rotate: 180 }}
           onClick={onFlipCamera}
-          className="lg:hidden w-11 h-11 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+          className="lg:hidden w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors active:bg-slate-400"
           aria-label="Flip camera"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -52,7 +52,7 @@ export default function ScannerControls({
           onClick={onCapture}
           disabled={!isStreaming}
           className={[
-            'relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200',
+            'relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-200',
             isStreaming
               ? 'bg-brand-500 hover:bg-brand-600 text-white shadow-lg shadow-brand-500/30 capture-pulse'
               : 'bg-slate-300 dark:bg-slate-600 text-slate-400 dark:text-slate-500 cursor-not-allowed',
@@ -70,7 +70,7 @@ export default function ScannerControls({
           whileTap={{ scale: 0.95 }}
           onClick={onToggleFilters}
           className={[
-            'w-11 h-11 rounded-full flex items-center justify-center transition-colors',
+            'w-14 h-14 rounded-full flex items-center justify-center transition-colors',
             showFilters
               ? 'bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400'
               : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600',
@@ -94,14 +94,14 @@ export default function ScannerControls({
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="flex flex-wrap gap-2 justify-center py-2">
+            <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory py-2 px-1 sm:flex-wrap sm:justify-center sm:overflow-visible">
               {FILTERS.map((f) => (
                 <motion.button
                   key={f.value}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => onFilterSelect(f.value)}
                   className={[
-                    'px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-150',
+                    'px-3 py-2 sm:py-1.5 rounded-full text-xs font-medium border transition-all duration-150 shrink-0 snap-start',
                     selectedFilter === f.value
                       ? 'bg-brand-500 text-white border-brand-500 shadow-sm'
                       : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:border-brand-400',

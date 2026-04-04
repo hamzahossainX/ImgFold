@@ -40,7 +40,7 @@ export default function CropEditor({
           style={{ backgroundColor: 'rgba(0,0,0,0.85)' }}
         >
           {/* ── Top bar ────────────────────────────────────── */}
-          <div className="shrink-0 flex items-center justify-between px-5 py-3 bg-black/40">
+          <div className="shrink-0 flex items-center justify-between px-3 sm:px-5 py-3 bg-black/40">
             <p className="text-sm text-white/80 font-medium truncate max-w-[50%]">
               ✂ {imageName || 'Crop Image'}
             </p>
@@ -86,7 +86,7 @@ export default function CropEditor({
           </motion.div>
 
           {/* ── Bottom controls ────────────────────────────── */}
-          <div className="shrink-0 bg-black/50 backdrop-blur-sm px-5 py-4 space-y-3">
+          <div className="shrink-0 bg-black/50 backdrop-blur-sm px-3 sm:px-5 py-3 sm:py-4 space-y-3">
             {/* Zoom slider */}
             <div className="flex items-center gap-3">
               <span className="text-[10px] text-white/50 uppercase tracking-widest w-14">Zoom</span>

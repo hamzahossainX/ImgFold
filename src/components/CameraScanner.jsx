@@ -170,9 +170,9 @@ export default function CameraScanner({ onImagesReady, onSwitchTab }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-w-full overflow-hidden">
       {/* ── Camera view ─────────────────────────────────────────── */}
-      <div className="relative rounded-2xl overflow-hidden bg-black aspect-[4/3] max-h-[420px]">
+      <div className="relative rounded-2xl overflow-hidden bg-black aspect-[4/3] max-h-[280px] sm:max-h-[360px] md:max-h-[420px] w-full">
         {error ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 space-y-3">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
@@ -281,13 +281,13 @@ export default function CameraScanner({ onImagesReady, onSwitchTab }) {
               {capturedImages.length} Captured
             </p>
 
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin snap-x snap-mandatory -mx-1 px-1">
               {capturedImages.map((img, idx) => (
-                <div key={idx} className="relative shrink-0 group">
+                <div key={idx} className="relative shrink-0 group snap-start">
                   <img
                     src={img}
                     alt={`Scan ${idx + 1}`}
-                    className="w-20 h-20 rounded-lg object-cover border-2 border-slate-200 dark:border-slate-700"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover border-2 border-slate-200 dark:border-slate-700"
                   />
                   {/* Order badge */}
                   <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-brand-500 text-white text-[9px] font-bold flex items-center justify-center shadow">
@@ -295,7 +295,7 @@ export default function CameraScanner({ onImagesReady, onSwitchTab }) {
                   </span>
 
                   {/* Hover actions */}
-                  <div className="absolute inset-0 bg-black/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5">
+                  <div className="absolute inset-0 bg-black/50 rounded-lg sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5">
                     {/* Crop */}
                     <button
                       onClick={() => openCropForIndex(idx)}
@@ -321,7 +321,7 @@ export default function CameraScanner({ onImagesReady, onSwitchTab }) {
               {/* Add more placeholder */}
               <button
                 onClick={handleCapture}
-                className="shrink-0 w-20 h-20 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-400 hover:border-brand-400 hover:text-brand-500 transition-colors"
+                className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-400 hover:border-brand-400 hover:text-brand-500 transition-colors snap-start"
               >
                 <span className="text-2xl leading-none">+</span>
               </button>
