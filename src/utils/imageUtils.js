@@ -1,3 +1,4 @@
+// Utility functions for image reading, compression and processing
 /**
  * imageUtils.js
  * Client-side image helpers: reading, compression via Canvas, dimension detection.
