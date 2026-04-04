@@ -160,7 +160,7 @@ export default function App() {
   /* ─────────────────────────────────────────────────────────────── */
   return (
     <div
-      className={`h-full flex flex-col ${FONT_SIZE_CLASS[fontSize]} transition-colors duration-300`}
+      className={`min-h-screen flex flex-col ${FONT_SIZE_CLASS[fontSize]} transition-colors duration-300`}
     >
       {/* ── Header ── */}
       <Header
@@ -172,15 +172,16 @@ export default function App() {
       />
 
       {/* ── Body: sidebar + main ── */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+      <div className="flex-1 flex flex-col-reverse lg:flex-row">
 
         {/* Left sidebar — Controls */}
         <aside
           className={[
             'w-full lg:w-80 xl:w-96 shrink-0',
-            'border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800',
+            'order-2 lg:order-none',
+            'border-t lg:border-t-0 lg:border-r border-slate-200 dark:border-slate-800',
             'bg-white dark:bg-slate-900',
-            'overflow-y-auto',
+            'max-h-[40vh] lg:max-h-none overflow-y-auto',
           ].join(' ')}
         >
           <ControlsPanel
@@ -191,7 +192,7 @@ export default function App() {
         </aside>
 
         {/* Right — uploader + grid + generator bar */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-slate-950">
+        <div className="flex-1 flex flex-col order-1 lg:order-none min-h-0 bg-slate-50 dark:bg-slate-950">
 
           {/* Scrollable content area */}
           <div className="flex-1 overflow-y-auto p-5 lg:p-7">
