@@ -1,3 +1,4 @@
+// Left sidebar with all PDF customization controls
 /**
  * ControlsPanel.jsx
  * Left sidebar containing all PDF customisation controls:
