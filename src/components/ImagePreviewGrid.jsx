@@ -27,7 +27,7 @@ import SortableImageCard from './SortableImageCard.jsx';
 
 /* ─────────────────────────────────────────────────────────────────── */
 
-export default function ImagePreviewGrid({ images, onRemove, onReorder }) {
+export default function ImagePreviewGrid({ images, onRemove, onReorder, onCrop }) {
   const [activeId, setActiveId] = useState(null);
 
   /* Configure sensors:
@@ -100,6 +100,7 @@ export default function ImagePreviewGrid({ images, onRemove, onReorder }) {
                   image={image}
                   index={index}
                   onRemove={onRemove}
+                  onCrop={onCrop}
                 />
               ))}
             </AnimatePresence>
