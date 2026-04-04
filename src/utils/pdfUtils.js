@@ -1,3 +1,4 @@
+// PDF generation utilities using pdf-lib
 /**
  * pdfUtils.js
  * PDF generation using pdf-lib.
