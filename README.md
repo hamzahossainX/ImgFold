@@ -21,6 +21,19 @@
 ## Live Demo
 https://hamzahossainx.github.io/ImgFold/
 
+## 📷 New Features — Camera Scanner
+
+| Feature | Description |
+|---------|-------------|
+| Live Camera Feed | Use device camera to scan documents |
+| Auto Document Enhance | Automatically enhance scanned documents |
+| Image Filters | Original, Grayscale, B&W, Auto Enhance, High Contrast |
+| Image Crop | Crop any image before converting to PDF |
+| Zoom & Rotate | Zoom 1x-3x and rotate crop area 0-360° |
+| HD Quality | Resize to A4 at 300 DPI before PDF generation |
+| Front/Back Camera | Switch between front and back camera |
+| Filter Preview | See live filter previews before applying |
+
 ## ✨ Features
 
 | # | Feature | Description |
