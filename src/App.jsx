@@ -246,6 +246,7 @@ export default function App() {
               isGenerating={isGenerating}
               progress={progress}
               pdfReady={!!pdfBytes}
+              pdfBytes={pdfBytes}
               error={error}
               pdfName={settings.pdfName}
               onGenerate={handleGenerate}

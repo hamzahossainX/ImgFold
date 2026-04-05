@@ -7,6 +7,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProgressBar from './ProgressBar.jsx';
+import PDFPreview from './PDFPreview.jsx';
 
 /* ── Icons ─────────────────────────────────────────────────────────── */
 const GenerateIcon = () => (
@@ -62,6 +63,7 @@ export default function PDFGenerator({
   isGenerating,
   progress,
   pdfReady,
+  pdfBytes,
   error,
   pdfName,
   onGenerate,
@@ -155,6 +157,14 @@ export default function PDFGenerator({
             </motion.button>
           )}
         </AnimatePresence>
+
+        {/* ── Preview button ── */}
+        <PDFPreview
+          pdfBytes={pdfBytes}
+          pdfName={pdfName}
+          pageCount={imageCount}
+          onDownload={onDownload}
+        />
       </div>
 
       {/* Success status */}
