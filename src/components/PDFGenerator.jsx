@@ -7,7 +7,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProgressBar from './ProgressBar.jsx';
-import PDFPreview from './PDFPreview.jsx';
 
 /* ── Icons ─────────────────────────────────────────────────────────── */
 const GenerateIcon = () => (
@@ -17,6 +16,14 @@ const GenerateIcon = () => (
     <polyline points="14 2 14 8 20 8"/>
     <line x1="12" y1="18" x2="12" y2="12"/>
     <line x1="9"  y1="15" x2="15" y2="15"/>
+  </svg>
+);
+
+const PreviewIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+    <circle cx="12" cy="12" r="3"/>
   </svg>
 );
 
@@ -67,6 +74,7 @@ export default function PDFGenerator({
   error,
   pdfName,
   onGenerate,
+  onPreview,
   onDownload,
 }) {
   const canGenerate = imageCount > 0 && !isGenerating;
@@ -95,8 +103,8 @@ export default function PDFGenerator({
         )}
       </AnimatePresence>
 
-      {/* Buttons row */}
-      <div className="flex items-center gap-3">
+      {/* Buttons row: stacked vertically on mobile, row on tablet/desktop */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
 
         {/* ── Generate button ── */}
         <motion.button
@@ -105,7 +113,7 @@ export default function PDFGenerator({
           onClick={onGenerate}
           disabled={!canGenerate}
           className={[
-            'flex-1 flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm font-poppins transition-all duration-200',
+            'w-full sm:w-auto sm:flex-1 flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm font-poppins transition-all duration-200 shrink-0',
             canGenerate
               ? 'bg-brand-500 hover:bg-brand-600 text-white shadow-lg shadow-brand-500/25 hover:shadow-brand-500/35'
               : imageCount === 0
@@ -138,6 +146,26 @@ export default function PDFGenerator({
           )}
         </motion.button>
 
+        {/* ── Preview button — only shown when PDF is ready ── */}
+        <AnimatePresence>
+          {pdfReady && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.85, x: 10 }}
+              animate={{ opacity: 1, scale: 1,    x: 0  }}
+              exit={{ opacity: 0, scale: 0.85, x: 10 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.02 }}
+              onClick={onPreview}
+              className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm font-poppins transition-all duration-200 border-2 border-teal-500 text-teal-600 dark:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20"
+              aria-label="Preview PDF"
+            >
+              <PreviewIcon />
+              <span>Preview</span>
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         {/* ── Download button — only shown when PDF is ready ── */}
         <AnimatePresence>
           {pdfReady && (
@@ -149,7 +177,7 @@ export default function PDFGenerator({
               whileTap={{ scale: 0.96 }}
               whileHover={{ scale: 1.02 }}
               onClick={onDownload}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm font-poppins shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/35 transition-all duration-200"
+              className="w-full sm:w-auto shrink-0 flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm font-poppins shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/35 transition-all duration-200"
               aria-label={`Download ${pdfName || 'converted'}.pdf`}
             >
               <DownloadIcon />
@@ -157,14 +185,6 @@ export default function PDFGenerator({
             </motion.button>
           )}
         </AnimatePresence>
-
-        {/* ── Preview button ── */}
-        <PDFPreview
-          pdfBytes={pdfBytes}
-          pdfName={pdfName}
-          pageCount={imageCount}
-          onDownload={onDownload}
-        />
       </div>
 
       {/* Success status */}
