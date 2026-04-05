@@ -13,11 +13,13 @@ import ImageUploader    from './components/ImageUploader.jsx';
 import ImagePreviewGrid from './components/ImagePreviewGrid.jsx';
 import ControlsPanel    from './components/ControlsPanel.jsx';
 import PDFGenerator     from './components/PDFGenerator.jsx';
+import PDFPreview       from './components/PDFPreview.jsx';
 import TabSwitcher      from './components/TabSwitcher.jsx';
 import CameraScanner    from './components/CameraScanner.jsx';
 import CropEditor       from './components/CropEditor.jsx';
 
 import { useImageCrop }  from './hooks/useImageCrop.js';
+import { usePDFPreview } from './hooks/usePDFPreview.js';
 
 import { usePDFGeneration } from './hooks/usePDFGeneration.js';
 import {
@@ -55,6 +57,23 @@ export default function App() {
 
   const { isGenerating, progress, pdfBytes, error, generate, download, reset } =
     usePDFGeneration();
+
+  const {
+    isOpen: previewOpen,
+    currentPage,
+    zoomLevel,
+    blobUrl,
+    isLoading: previewLoading,
+    pageCount: previewPageCount,
+    openPreview,
+    closePreview,
+    nextPage,
+    prevPage,
+    goToPage,
+    zoomIn,
+    zoomOut,
+    getZoomPercent
+  } = usePDFPreview();
 
   const cropHook = useImageCrop();
   const [cropTargetId, setCropTargetId] = useState(null);
@@ -157,6 +176,11 @@ export default function App() {
   const handleGenerate = () => generate(images, settings);
   const handleDownload = () => download(settings.pdfName);
 
+  const handlePreview = useCallback(() => {
+    if (!pdfBytes) return;
+    openPreview(pdfBytes, settings.pdfName, images.length);
+  }, [pdfBytes, settings.pdfName, images.length, openPreview]);
+
   /* ─────────────────────────────────────────────────────────────── */
   return (
     <div
@@ -250,6 +274,7 @@ export default function App() {
               error={error}
               pdfName={settings.pdfName}
               onGenerate={handleGenerate}
+              onPreview={handlePreview}
               onDownload={handleDownload}
             />
           </div>
@@ -271,6 +296,30 @@ export default function App() {
         onApply={handleCropApply}
         onCancel={cropHook.closeCrop}
       />
+
+      {/* PDF Preview Modal */}
+      <AnimatePresence>
+        {previewOpen && (
+          <PDFPreview
+            isOpen={previewOpen}
+            blobUrl={blobUrl}
+            filename={settings.pdfName}
+            pageCount={previewPageCount}
+            currentPage={currentPage}
+            zoomLevel={zoomLevel}
+            isLoading={previewLoading}
+            pdfBytes={pdfBytes}
+            onClose={closePreview}
+            onNextPage={nextPage}
+            onPrevPage={prevPage}
+            onGoToPage={goToPage}
+            onZoomIn={zoomIn}
+            onZoomOut={zoomOut}
+            getZoomPercent={getZoomPercent}
+            onDownload={handleDownload}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
